@@ -21,45 +21,34 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track saveTrack(Track track) throws TrackAlreadyExistException {
-        if (trackRepository.findById(track.getTrackId()).isPresent())
-            throw new TrackAlreadyExistException();
-        else
-            return trackRepository.save(track);
+        if (trackRepository.findById(track.getTrackId()).isPresent()) throw new TrackAlreadyExistException();
+        else return trackRepository.save(track);
     }
 
     @Override
     public boolean deleteTrackById(Integer id) throws TrackNotFoundException {
         Optional<Track> trackOptional = trackRepository.findById(id);
-        if (trackOptional.isPresent())
-            return true;
-        else
-            return false;
+        return trackOptional.isPresent();
     }
 
     @Override
     public List<Track> getAllTrack() throws TrackNotFoundException {
         List<Track> allTracks = trackRepository.findAll();
-        if (allTracks.isEmpty())
-            throw new TrackNotFoundException();
-        else
-            return allTracks;
+        if (allTracks.isEmpty()) throw new TrackNotFoundException();
+        else return allTracks;
     }
 
     @Override
     public List<Track> getTrackByRatingGreaterThanGivenRating(double rating) throws TrackNotFoundException {
         List<Track> trackByGreaterRating = trackRepository.fetchByRatingGreaterThan(rating);
-        if (trackByGreaterRating.isEmpty())
-            throw new TrackNotFoundException();
-        else
-            return trackByGreaterRating;
+        if (trackByGreaterRating.isEmpty()) throw new TrackNotFoundException();
+        else return trackByGreaterRating;
     }
 
     @Override
     public List<Track> getAllTrackByArtistName(String artistName) throws TrackNotFoundException {
         List<Track> trackListByArtistName = trackRepository.fetchByArtistName(artistName);
-        if (trackListByArtistName.isEmpty())
-            throw new TrackNotFoundException();
-        else
-            return trackListByArtistName;
+        if (trackListByArtistName.isEmpty()) throw new TrackNotFoundException();
+        else return trackListByArtistName;
     }
 }
