@@ -33,7 +33,11 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public List<Track> getAllTrack() throws TrackNotFoundException {
-        return null;
+        List<Track> allTracks = trackRepository.findAll();
+        if (allTracks.isEmpty())
+            throw new TrackNotFoundException();
+        else
+            return allTracks;
     }
 
     @Override
