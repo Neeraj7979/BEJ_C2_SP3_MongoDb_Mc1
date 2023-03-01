@@ -70,11 +70,6 @@ public class Music {
 
     @Override
     public String toString() {
-        return "Music{" +
-                "trackId=" + trackId +
-                ", trackName='" + trackName + '\'' +
-                ", trackRating=" + trackRating +
-                ", trackArtist=" + trackArtist +
-                '}';
+        return "Music{" + "trackId=" + trackId + ", trackName='" + trackName + '\'' + ", trackRating=" + trackRating + ", trackArtist=" + trackArtist + '}';
     }
 }
