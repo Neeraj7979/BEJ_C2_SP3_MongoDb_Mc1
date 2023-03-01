@@ -53,4 +53,15 @@ public class TrackController {
         }
 
     }
+
+    @GetMapping("/getAllTrack/{rating}")
+    public ResponseEntity<?> getTrackByRatingGreaterThanFour(double rating) {
+        try {
+            List<Track> trackRatingGreaterThanFour = trackService.getTrackByRatingGreaterThanGivenRating(rating);
+            return new ResponseEntity<>(trackRatingGreaterThanFour, HttpStatus.FOUND);
+        } catch (TrackNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
 }
