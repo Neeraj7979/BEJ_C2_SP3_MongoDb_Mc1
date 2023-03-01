@@ -2,13 +2,12 @@ package com.niit.bej.c2_sp3_NoSql_Mc1.controller;
 
 import com.niit.bej.c2_sp3_NoSql_Mc1.domain.Track;
 import com.niit.bej.c2_sp3_NoSql_Mc1.exception.TrackAlreadyExistException;
+import com.niit.bej.c2_sp3_NoSql_Mc1.exception.TrackNotFoundException;
 import com.niit.bej.c2_sp3_NoSql_Mc1.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TrackController {
@@ -26,6 +25,19 @@ public class TrackController {
             return new ResponseEntity<>(trackService, HttpStatus.ACCEPTED);
         } catch (TrackAlreadyExistException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @DeleteMapping("/deleteTrack/{id}")
+    public ResponseEntity<?> deleteTrackById(@PathVariable Integer id) {
+        try {
+            boolean status = trackService.deleteTrackById(id);
+            if (status == true)
+                return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } catch (TrackNotFoundException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
