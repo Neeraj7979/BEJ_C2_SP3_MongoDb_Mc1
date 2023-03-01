@@ -6,4 +6,9 @@ public class Artist {
 
     public Artist() {
     }
+
+    public Artist(int artistId, String artistName) {
+        this.artistId = artistId;
+        this.artistName = artistName;
+    }
 }
