@@ -20,4 +20,36 @@ public class Music {
         this.trackRating = trackRating;
         this.trackArtist = trackArtist;
     }
+
+    public int getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(int trackId) {
+        this.trackId = trackId;
+    }
+
+    public String getTrackName() {
+        return trackName;
+    }
+
+    public void setTrackName(String trackName) {
+        this.trackName = trackName;
+    }
+
+    public double getTrackRating() {
+        return trackRating;
+    }
+
+    public void setTrackRating(double trackRating) {
+        this.trackRating = trackRating;
+    }
+
+    public Artist getTrackArtist() {
+        return trackArtist;
+    }
+
+    public void setTrackArtist(Artist trackArtist) {
+        this.trackArtist = trackArtist;
+    }
 }
