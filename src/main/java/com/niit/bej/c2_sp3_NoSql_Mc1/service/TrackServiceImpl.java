@@ -42,11 +42,15 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public List<Track> getTrackByRatingGreaterThanGivenRating(double rating) throws TrackNotFoundException {
-        return null;
+        List<Track> trackByGreaterRating = trackRepository.fetchByRatingGreaterThan(rating);
+        if (trackByGreaterRating.isEmpty())
+            throw new TrackNotFoundException();
+        else
+            return trackByGreaterRating;
     }
 
     @Override
     public List<Track> getAllTrackByArtistName(String artistName) throws TrackNotFoundException {
-        return null;
+
     }
 }
