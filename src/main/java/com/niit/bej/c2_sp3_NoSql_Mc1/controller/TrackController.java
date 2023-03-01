@@ -34,10 +34,8 @@ public class TrackController {
     public ResponseEntity<?> deleteTrackById(@PathVariable Integer id) {
         try {
             boolean status = trackService.deleteTrackById(id);
-            if (status == true)
-                return new ResponseEntity<>(HttpStatus.ACCEPTED);
-            else
-                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            if (status) return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } catch (TrackNotFoundException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -55,7 +53,7 @@ public class TrackController {
     }
 
     @GetMapping("/getAllTrack/{rating}")
-    public ResponseEntity<?> getTrackByRatingGreaterThanFour(double rating) {
+    public ResponseEntity<?> getTrackByRatingGreaterThanFour(@PathVariable double rating) {
         try {
             List<Track> trackRatingGreaterThanFour = trackService.getTrackByRatingGreaterThanGivenRating(rating);
             return new ResponseEntity<>(trackRatingGreaterThanFour, HttpStatus.FOUND);
@@ -63,5 +61,15 @@ public class TrackController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    @GetMapping("/trackByArtistName/{artistName}")
+    public ResponseEntity<?> getTrackByArtistName(@PathVariable String artistName) {
+        try {
+            List<Track> trackByArtistName = trackService.getAllTrackByArtistName(artistName);
+            return new ResponseEntity<>(HttpStatus.FOUND);
+        } catch (TrackNotFoundException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
