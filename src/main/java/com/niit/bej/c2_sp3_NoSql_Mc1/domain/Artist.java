@@ -1,5 +1,7 @@
 package com.niit.bej.c2_sp3_NoSql_Mc1.domain;
 
+import java.util.Objects;
+
 public class Artist {
     private int artistId;
     private String artistName;
@@ -22,6 +24,19 @@ public class Artist {
 
     public String getArtistName() {
         return artistName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artist artist = (Artist) o;
+        return artistId == artist.artistId && Objects.equals(artistName, artist.artistName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(artistId, artistName);
     }
 
     public void setArtistName(String artistName) {
