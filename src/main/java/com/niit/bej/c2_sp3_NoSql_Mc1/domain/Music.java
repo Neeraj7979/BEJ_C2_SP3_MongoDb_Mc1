@@ -3,6 +3,8 @@ package com.niit.bej.c2_sp3_NoSql_Mc1.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document
 public class Music {
     @Id
@@ -51,5 +53,18 @@ public class Music {
 
     public void setTrackArtist(Artist trackArtist) {
         this.trackArtist = trackArtist;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Music music = (Music) o;
+        return trackId == music.trackId && Double.compare(music.trackRating, trackRating) == 0 && Objects.equals(trackName, music.trackName) && Objects.equals(trackArtist, music.trackArtist);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trackId, trackName, trackRating, trackArtist);
     }
 }
