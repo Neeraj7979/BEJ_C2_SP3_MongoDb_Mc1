@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TrackServiceImpl implements TrackService {
@@ -28,7 +29,11 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public boolean deleteTrackById(Integer id) throws TrackNotFoundException {
-        return false;
+        Optional<Track> trackOptional = trackRepository.findById(id);
+        if (trackOptional.isPresent())
+            return true;
+        else
+            return false;
     }
 
     @Override
