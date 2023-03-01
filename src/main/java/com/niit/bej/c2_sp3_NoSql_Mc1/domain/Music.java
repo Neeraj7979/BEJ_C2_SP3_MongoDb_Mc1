@@ -9,6 +9,15 @@ public class Music {
     private int trackId;
     private String trackName;
     private double trackRating;
-    private Artist artist;
+    private Artist trackArtist;
 
+    public Music() {
+    }
+
+    public Music(int trackId, String trackName, double trackRating, Artist trackArtist) {
+        this.trackId = trackId;
+        this.trackName = trackName;
+        this.trackRating = trackRating;
+        this.trackArtist = trackArtist;
+    }
 }
