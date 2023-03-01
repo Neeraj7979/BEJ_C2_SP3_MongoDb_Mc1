@@ -67,4 +67,14 @@ public class Music {
     public int hashCode() {
         return Objects.hash(trackId, trackName, trackRating, trackArtist);
     }
+
+    @Override
+    public String toString() {
+        return "Music{" +
+                "trackId=" + trackId +
+                ", trackName='" + trackName + '\'' +
+                ", trackRating=" + trackRating +
+                ", trackArtist=" + trackArtist +
+                '}';
+    }
 }
