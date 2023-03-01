@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class TrackController {
     private final TrackService trackService;
@@ -39,5 +41,16 @@ public class TrackController {
         } catch (TrackNotFoundException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/getAllTrack")
+    public ResponseEntity<?> getAllTrack() {
+        try {
+            List<Track> allTracks = trackService.getAllTrack();
+            return new ResponseEntity<>(allTracks, HttpStatus.FOUND);
+        } catch (TrackNotFoundException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }
