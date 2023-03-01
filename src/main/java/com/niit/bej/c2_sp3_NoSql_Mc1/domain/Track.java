@@ -6,17 +6,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Objects;
 
 @Document
-public class Music {
+public class Track {
     @Id
     private int trackId;
     private String trackName;
     private double trackRating;
     private Artist trackArtist;
 
-    public Music() {
+    public Track() {
     }
 
-    public Music(int trackId, String trackName, double trackRating, Artist trackArtist) {
+    public Track(int trackId, String trackName, double trackRating, Artist trackArtist) {
         this.trackId = trackId;
         this.trackName = trackName;
         this.trackRating = trackRating;
@@ -59,7 +59,7 @@ public class Music {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Music music = (Music) o;
+        Track music = (Track) o;
         return trackId == music.trackId && Double.compare(music.trackRating, trackRating) == 0 && Objects.equals(trackName, music.trackName) && Objects.equals(trackArtist, music.trackArtist);
     }
 
