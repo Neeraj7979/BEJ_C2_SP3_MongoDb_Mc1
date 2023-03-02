@@ -21,12 +21,14 @@ public class TrackController {
     }
 
     @PostMapping("/saveTrack")
-    public ResponseEntity<?> saveTrack(@RequestBody Track track) {
+    public ResponseEntity<?> addTrack(@RequestBody Track track) {
         try {
             Track saveNewTrack = trackService.saveTrack(track);
             return new ResponseEntity<>(trackService, HttpStatus.ACCEPTED);
         } catch (TrackAlreadyExistException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
@@ -38,16 +40,20 @@ public class TrackController {
             else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } catch (TrackNotFoundException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/getAllTrack")
-    public ResponseEntity<?> getAllTrack() {
+    @GetMapping("/gettrack")
+    public ResponseEntity<?> getTrack() {
         try {
             List<Track> allTracks = trackService.getAllTrack();
             return new ResponseEntity<>(allTracks, HttpStatus.FOUND);
         } catch (TrackNotFoundException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
 
     }
@@ -59,7 +65,10 @@ public class TrackController {
             return new ResponseEntity<>(trackRatingGreaterThanFour, HttpStatus.FOUND);
         } catch (TrackNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
+
 
     }
 
@@ -70,6 +79,8 @@ public class TrackController {
             return new ResponseEntity<>(HttpStatus.FOUND);
         } catch (TrackNotFoundException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 }
